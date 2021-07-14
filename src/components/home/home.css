@@ -1,0 +1,7 @@
+.body {
+    margin: 20px 0.5%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1.5px solid #000;
+    background-color: #F8EAD9;
+  }

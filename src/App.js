@@ -1,12 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-import Music from './components/home/home';
+import Index from './components/index';
 
 function App() {
   return (
     <div className="App">
       <h1>Create Playlist</h1>
-      <Music/>
+      <Index/>
     </div>
   );
 }

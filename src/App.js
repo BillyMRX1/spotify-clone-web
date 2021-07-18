@@ -1,11 +1,11 @@
 import './App.css';
-import Index from './components/index';
+import CardPlaylist from './page/playlist';
 
 function App() {
   return (
     <div className="App">
       <h1>Create Playlist</h1>
-      <Index/>
+      <CardPlaylist/>
     </div>
   );
 }

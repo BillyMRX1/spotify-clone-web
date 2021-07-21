@@ -1,8 +1,8 @@
 import './index.css';
 
-function index(){
+function index(props){
     return(
-        <button type="submit" className="btn">SELECT</button>
+        <a href={props.url} className="btn">SELECT</a>
     )
 }
 

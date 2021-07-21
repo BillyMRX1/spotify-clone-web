@@ -10,7 +10,7 @@ function Card(props){
             <div className="container">
                 <Image src={props.image_url}/>
                 <Contents title={props.title} artist={props.artist} album={props.album}/>
-                <Button/>
+                <Button url={props.url}/>
             </div>
         </div>
     )

@@ -1,16 +1,59 @@
-import React from 'react';
-import Card from '../components/card';
-import data from '../datadummy/data';
+import {Component} from 'react'
+import Landing from '../components/landing'
 import './index.css';
 
-function CardPlaylist(){
-    return(
-        <div className="card-music">
-            {data.map(music => (
-                <Card key={music.id} image_url={music.album.images[1].url} title={music.name} artist={music.artists[0].name} album={music.album.name}/>
-            ))}
-        </div>
-    );
+class CardPlaylist extends Component{
+    constructor(props){
+        super(props)
+        this.client_id = '54b3c23f1f1d404e95c7c3f88b410955';
+        this.scope = 'playlist-modify-private';
+        this.redirect = 'http://localhost:3000/';
+        this.auth_link = `https://accounts.spotify.com/id/authorize?response_type=token&client_id=${this.client_id}&scope=${this.scope}&redirect_uri=${this.redirect}&&show_dialog=true`;
+        this.state = {
+            token: null
+        }
+    }
+
+    getHash = () => {
+        const hash = window.location.hash
+          .substring(1)
+          .split("&")
+          .reduce(function(initial, item) {
+            if (item) {
+              var parts = item.split("=");
+              initial[parts[0]] = decodeURIComponent(parts[1]);
+            }
+            return initial;
+          }, {});
+        
+        window.location.hash = "";
+    
+        return hash;
+      }
+
+    componentDidMount() {
+        const hash = this.getHash();
+        const token = hash.access_token;
+    
+        if (token) {
+          this.setState({
+            token
+          })
+        } 
+    }
+
+    render(){
+        const {token} = this.state;
+
+        return(
+            <div>
+                {this.state.token === null
+                ? <a href={this.auth_link} onClick={this.login} className="btn">Login</a>
+                : <Landing token={token}/>
+                }
+            </div>
+        )
+    }
 }
 
 export default CardPlaylist;

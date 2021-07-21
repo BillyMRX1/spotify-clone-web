@@ -2,3 +2,36 @@
     display: grid;
     grid-template-columns: repeat(8, 1fr);
 }
+
+.btn{
+    border: none;
+    background: #1DB954;
+    color: white;
+    margin-left: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    box-shadow: 0 4px 0 rgb(16, 119, 50);
+    transition: all .2s ease-out;
+}
+
+.btn:hover{
+    background: rgb(34, 211, 96);
+    transition: none;
+}
+
+.btn:active{
+    box-shadow: none;
+    position: relative;
+    top: 4px;
+}
+
+.search_bar {
+    border: 1px solid #bdc3c7;
+    padding: 10px 10px;
+    border-radius: 10px;
+    margin-left: 30px;
+    outline: none;
+  }

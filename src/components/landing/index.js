@@ -1,52 +1,63 @@
 import Card from '../card/index';
-import { Component } from 'react';
 import axios from 'axios';
+import { useState } from 'react';
 
-class index extends Component{
-    constructor(props){
-        super(props)
-        this.token = props.token;
-    }
+const LandingComponent = (props) =>{
+    
+    const token = props.token;
+    const[search, setSearch] = useState('')
+    const[result, setResult] = useState([])
+    const[trackSelect, setSelectedTrack] = useState([])
 
-    state = {
-        search: '',
-        track: []
-    };
-
-    getText = () =>{
+    const getText = () =>{
         const auth = {
-            headers: { Authorization: `Bearer ${this.token}` }
+            headers: { Authorization: `Bearer ${token}` }
         }
-
+    
         axios
-            .get(`https://api.spotify.com/v1/search?q=${this.state.search}&type=track`, auth)
+            .get(`https://api.spotify.com/v1/search?q=${search}&type=track`, auth)
             .then(response=>{
                 console.log(response.data.tracks.items)
-                this.setState({track: response.data.tracks.items})
+                setResult(response.data.tracks.items)
             })
     }
     
-    handleSearch = (e) =>{
-        this.setState({
-            search: e.target.value
-        })
+    const handleSearch = (e) =>{
+        setSearch(e.target.value)
     }
 
-    render(){
-        return(
-            <div>
-                <div>
-                    <input type="text" className="search_bar" onChange={this.handleSearch}/>
-                    <button onClick={this.getText} className="btn">Search</button>
-                </div>
-                <div className="card-music">
-                    {this.state.track.map(music => (
-                        <Card key={music.id} image_url={music.album.images[1].url} title={music.name} artist={music.artists[0].name} album={music.album.name} url={music.external_urls.spotify}/>
-                    ))}            
-                </div>
-            </div>
-        )
+    const handleSelect = (id) =>{
+        setSelectedTrack([...trackSelect, id])
     }
+
+    const handleDeselect = (id) =>{
+        const selectedTrack = trackSelect.filter((track) => track !== id)
+        setSelectedTrack([...selectedTrack]);
+    }
+
+    return(
+        <div>
+            <div>
+                <input type="text" className="search_bar" onChange={handleSearch}/>
+                <button onClick={getText} className="btn">Search</button>
+            </div>
+            <div className="card-music">
+                {result.map(music => (
+                    <Card 
+                        key={music.id} 
+                        image_url={music.album.images[1].url} 
+                        title={music.name} artist={music.artists[0].name} 
+                        album={music.album.name} 
+                        url={music.external_urls.spotify}
+                        
+                        selected={trackSelect.some((id) => id === music.uri)}
+                        onSelect={() => handleSelect(music.uri)}
+                        onDeselect={() => handleDeselect(music.uri)}
+                    />
+                ))}            
+            </div>
+        </div>
+    )
 }
 
-export default index;
+export default LandingComponent;

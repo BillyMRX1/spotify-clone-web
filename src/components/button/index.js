@@ -1,8 +1,14 @@
 import './index.css';
 
 function index(props){
+    const value = props.selected ? "Deselect" : "Select";
+
     return(
-        <a href={props.url} className="btn">SELECT</a>
+        <button
+            value={props.selected ? "Deselect" : "Select"}
+            onClick={props.selected ? props.onDeselect : props.onSelect}
+            className="btn"
+        >{value}</button>
     )
 }
 

@@ -10,7 +10,11 @@ function Card(props){
             <div className="container">
                 <Image src={props.image_url}/>
                 <Contents title={props.title} artist={props.artist} album={props.album}/>
-                <Button url={props.url}/>
+                <Button
+                    selected={props.selected}
+                    onSelect={props.onSelect}
+                    onDeselect={props.onDeselect}
+                />
             </div>
         </div>
     )

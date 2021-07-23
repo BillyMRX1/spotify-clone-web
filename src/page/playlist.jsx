@@ -5,9 +5,9 @@ import './index.css';
 class CardPlaylist extends Component{
     constructor(props){
         super(props)
-        this.client_id = '54b3c23f1f1d404e95c7c3f88b410955';
-        this.scope = 'playlist-modify-private';
-        this.redirect = 'http://localhost:3000/';
+        this.client_id = process.env.REACT_APP_CLIENT_ID;
+        this.scope = process.env.REACT_APP_SCOPE;
+        this.redirect = process.env.REACT_APP_REDIRECT;
         this.auth_link = `https://accounts.spotify.com/id/authorize?response_type=token&client_id=${this.client_id}&scope=${this.scope}&redirect_uri=${this.redirect}&&show_dialog=true`;
         this.state = {
             token: null

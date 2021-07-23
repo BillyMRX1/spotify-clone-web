@@ -1,0 +1,3 @@
+REACT_APP_CLIENT_ID = put_key
+REACT_APP_SCOPE = "playlist-modify-private"
+REACT_APP_REDIRECT = "http://localhost:3000/"

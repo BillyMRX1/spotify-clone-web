@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const FormPlaylistComponent = (props) => {
-    const {userId, token, data} = props
+    const {userId, data} = props
+    const token = `Bearer ${useSelector((state) => state.token.token)}`
     const[title, setTitle] = useState('')
     const[description, setDescription] = useState('')
     const minimumTitle = 10

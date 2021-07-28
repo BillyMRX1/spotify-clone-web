@@ -1,20 +1,17 @@
-import {Component} from 'react'
 import Landing from '../components/landing'
 import './style.css';
+import { setToken } from '../components/redux/reducer/reducer'
+import { useDispatch, useSelector } from 'react-redux';
 
-class CardPlaylist extends Component{
-    constructor(props){
-        super(props)
-        this.client_id = process.env.REACT_APP_CLIENT_ID;
-        this.scope = process.env.REACT_APP_SCOPE;
-        this.redirect = process.env.REACT_APP_REDIRECT;
-        this.auth_link = `https://accounts.spotify.com/id/authorize?response_type=token&client_id=${this.client_id}&scope=${this.scope}&redirect_uri=${this.redirect}&&show_dialog=true`;
-        this.state = {
-            token: null
-        }
-    }
+const CardPlaylist = () => {
+    const client_id = process.env.REACT_APP_CLIENT_ID;
+    const scope = process.env.REACT_APP_SCOPE;
+    const redirect = process.env.REACT_APP_REDIRECT;
+    const auth_link = `https://accounts.spotify.com/id/authorize?response_type=token&client_id=${client_id}&scope=${scope}&redirect_uri=${redirect}&&show_dialog=true`;
+    const token = useSelector((state) => state.token.token)
+    const dispatch = useDispatch()
 
-    getHash = () => {
+    const getHash = () => {
         const hash = window.location.hash
           .substring(1)
           .split("&")
@@ -26,34 +23,29 @@ class CardPlaylist extends Component{
             return initial;
           }, {});
         
-        window.location.hash = "";
+        window.location.hash = " ";
     
         return hash;
-      }
+      };
 
-    componentDidMount() {
-        const hash = this.getHash();
-        const token = hash.access_token;
-    
-        if (token) {
-          this.setState({
-            token
-          })
-        } 
-    }
+    const componentDidMount = () => {
+        const hash = getHash();
+        const temp = hash.access_token;
+        if(temp){
+          dispatch(setToken(temp))
+        }
+    };
 
-    render(){
-        const {token} = this.state;
+    componentDidMount();
 
-        return(
-            <div>
-                {this.state.token === null
-                ? <a href={this.auth_link} onClick={this.login} className="btn">Login</a>
-                : <Landing token={token}/>
-                }
-            </div>
-        )
-    }
+    return(
+      <div>
+          {token === " "
+          ? <a href={auth_link} className="btn">Login</a>
+          : <Landing/>
+          }
+      </div>
+    )
 }
 
 export default CardPlaylist;

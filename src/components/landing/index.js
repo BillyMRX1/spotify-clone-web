@@ -2,10 +2,11 @@ import Card from '../card/index';
 import axios from 'axios';
 import { useState } from 'react';
 import FormPlaylistComponent from '../formplaylist/index';
+import { useSelector } from 'react-redux';
 
-const LandingComponent = (props) =>{
+const LandingComponent = () =>{
     
-    const token = props.token;
+    const token = useSelector((state) => state.token.token);
     const[search, setSearch] = useState('')
     const[result, setResult] = useState([])
     const[trackSelect, setSelectedTrack] = useState([])

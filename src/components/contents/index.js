@@ -1,6 +1,6 @@
 import Title from'../title';
 import Album from'../album';
-import './index.css'
+import './style.css'
 
 function index(props){
     return(

@@ -2,7 +2,7 @@ import React from 'react';
 import Image from '../image';
 import Contents from '../contents';
 import Button from '../button';
-import './index.css';
+import './style.css';
 
 function Card(props){
     return(

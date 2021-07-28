@@ -1,6 +1,7 @@
 import Card from '../card/index';
 import axios from 'axios';
 import { useState } from 'react';
+import FormPlaylistComponent from '../formplaylist/index';
 
 const LandingComponent = (props) =>{
     
@@ -8,6 +9,7 @@ const LandingComponent = (props) =>{
     const[search, setSearch] = useState('')
     const[result, setResult] = useState([])
     const[trackSelect, setSelectedTrack] = useState([])
+    const[userId, setUserId] = useState("")
 
     const getText = () =>{
         const auth = {
@@ -35,9 +37,30 @@ const LandingComponent = (props) =>{
         setSelectedTrack([...selectedTrack]);
     }
 
+    const getUserId = async() =>{
+        try {
+            const response = await axios.get("https://api.spotify.com/v1/me",{
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            setUserId(response.data.id)
+        } catch(error){
+            console.error(error);
+        }
+    }
+
+    getUserId();
+
     return(
         <div>
             <div>
+                <FormPlaylistComponent userId={userId} token={`Bearer ${token}`} data={trackSelect}/>
+            </div>
+            <div>
+                <h1>Search</h1>
                 <input type="text" className="search_bar" onChange={handleSearch}/>
                 <button onClick={getText} className="btn">Search</button>
             </div>

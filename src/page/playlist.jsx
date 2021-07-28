@@ -1,6 +1,6 @@
 import {Component} from 'react'
 import Landing from '../components/landing'
-import './index.css';
+import './style.css';
 
 class CardPlaylist extends Component{
     constructor(props){

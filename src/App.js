@@ -1,11 +1,10 @@
 import './App.css';
-import CardPlaylist from './page/playlist';
+import SpotifyRoute from './components/router/index';
 
 function App() {
   return (
     <div className="App">
-      <h1>Create Playlist</h1>
-      <CardPlaylist/>
+      <SpotifyRoute/>
     </div>
   );
 }

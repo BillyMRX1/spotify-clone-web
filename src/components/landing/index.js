@@ -57,6 +57,7 @@ const LandingComponent = () =>{
 
     return(
         <div>
+            <h1>Create Playlist</h1>
             <div>
                 <FormPlaylistComponent userId={userId} token={`Bearer ${token}`} data={trackSelect}/>
             </div>

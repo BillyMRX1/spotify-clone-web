@@ -1,13 +1,14 @@
-import Landing from '../components/landing'
-import './style.css';
-import { setToken } from '../components/redux/reducer/reducer'
+import { BrowserRouter as Router, Switch, Route, Redirect, } from 'react-router-dom';
+import Playlist from '../../page/playlist/playlist'
+import Login from '../../page/login/login'
 import { useDispatch, useSelector } from 'react-redux';
+import { setToken } from '../redux/reducer/reducer'
 
-const CardPlaylist = () => {
+const SpotifyRoute = () => {
     const client_id = process.env.REACT_APP_CLIENT_ID;
     const scope = process.env.REACT_APP_SCOPE;
     const redirect = process.env.REACT_APP_REDIRECT;
-    const auth_link = `https://accounts.spotify.com/id/authorize?response_type=token&client_id=${client_id}&scope=${scope}&redirect_uri=${redirect}&&show_dialog=true`;
+    const auth_link = `https://accounts.spotify.com/id/authorize?response_type=token&client_id=${client_id}&scope=${scope}&redirect_uri=${redirect}&show_dialog=true`;
     const token = useSelector((state) => state.token.token)
     const dispatch = useDispatch()
 
@@ -23,7 +24,7 @@ const CardPlaylist = () => {
             return initial;
           }, {});
         
-        window.location.hash = " ";
+        window.location.hash = "";
     
         return hash;
       };
@@ -38,14 +39,19 @@ const CardPlaylist = () => {
 
     componentDidMount();
 
+    console.log(token)
     return(
-      <div>
-          {token === " "
-          ? <a href={auth_link} className="btn">Login</a>
-          : <Landing/>
-          }
-      </div>
+        <Router>
+            <Switch>
+                <Route path="/create-playlist">
+                    {token === " " ? <Redirect to="/"/> : <Playlist/>}
+                </Route>
+                <Route path="/">
+                    {token === " " ? <Login auth_link={auth_link}/> : <Redirect to="/create-playlist"/>}
+                </Route>
+            </Switch>
+        </Router>
     )
 }
 
-export default CardPlaylist;
+export default SpotifyRoute;

@@ -1,10 +1,10 @@
-import './App.css';
-import SpotifyRoute from './components/router/index';
+import "./App.css";
+import SpotifyRoute from "./components/router/index";
 
 function App() {
   return (
     <div className="App">
-      <SpotifyRoute/>
+      <SpotifyRoute />
     </div>
   );
 }

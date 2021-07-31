@@ -1,25 +1,25 @@
-.btn{
-    border: none;
-    background: #1DB954;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    box-shadow: 0 4px 0 rgb(16, 119, 50);
-    transition: all .2s ease-out;
-    text-align: center;
+.btn {
+  border: none;
+  background: #1db954;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  box-shadow: 0 4px 0 rgb(16, 119, 50);
+  transition: all 0.2s ease-out;
+  text-align: center;
 }
 
-.btn:hover{
-    background: rgb(34, 211, 96);
-    transition: none;
+.btn:hover {
+  background: rgb(34, 211, 96);
+  transition: none;
 }
 
-.btn:active{
-    box-shadow: none;
-    position: relative;
-    top: 4px;
+.btn:active {
+  box-shadow: none;
+  position: relative;
+  top: 4px;
 }

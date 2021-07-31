@@ -1,15 +1,18 @@
-import './style.css';
+import "./style.css";
 
-function index(props){
-    const value = props.selected ? "Deselect" : "Select";
+function index(props) {
+  const { selected, onSelect, onDeselect } = props;
+  const value = selected ? "Deselect" : "Select";
 
-    return(
-        <button
-            value={props.selected ? "Deselect" : "Select"}
-            onClick={props.selected ? props.onDeselect : props.onSelect}
-            className="btn"
-        >{value}</button>
-    )
+  return (
+    <button
+      value={selected ? "Deselect" : "Select"}
+      onClick={selected ? onDeselect : onSelect}
+      className="btn"
+    >
+      {value}
+    </button>
+  );
 }
 
 export default index;

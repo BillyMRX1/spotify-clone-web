@@ -1,10 +1,11 @@
-function index(props){
-    return(
-        <div>
-            <p>{props.artist}</p>
-            <p>{props.album}</p>
-        </div>
-    )
+function index(props) {
+  const { artist, album } = props;
+  return (
+    <div>
+      <p>{artist}</p>
+      <p>{album}</p>
+    </div>
+  );
 }
 
 export default index;

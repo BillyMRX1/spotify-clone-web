@@ -1,14 +1,15 @@
-import Title from'../title';
-import Album from'../album';
-import './style.css'
+import Title from "../title";
+import Album from "../album";
+import "./style.css";
 
-function index(props){
-    return(
-        <div className="music-contents">
-            <Title title={props.title}/>
-            <Album artist={props.artist} album={props.album}/>
-        </div>
-    )
+function index(props) {
+  const { title, artist, album } = props;
+  return (
+    <div className="music-contents">
+      <Title title={title} />
+      <Album artist={artist} album={album} />
+    </div>
+  );
 }
 
 export default index;

@@ -1,12 +1,12 @@
-import Landing from '../../components/landing/index'
+import PlaylistComponent from '../../components/landing/index'
 import './style.css';
 
-const CardPlaylist = () => {
+const PlaylistPage = () => {
     return(
       <div>
-          <Landing/>
+          <PlaylistComponent/>
       </div>
     )
 }
 
-export default CardPlaylist;
+export default PlaylistPage;

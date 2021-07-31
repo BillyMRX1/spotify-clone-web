@@ -1,25 +1,24 @@
-  .card {
-    display: flex;
-    justify-content: center;
-    margin: 20px 10px;
-  }
+.card {
+  display: flex;
+  justify-content: center;
+  margin: 20px 10px;
+}
 
-  .container {
-    background-color: #242424;
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.2s ease-out;
-    width: 150px;
-  }
-  
-  .container:hover {
-    background-color: #313131;
-    cursor: pointer;
-  }
-  
-  .container:hover .img {
-    box-shadow: 0 0 15px 3px #242424;
-  }
-  
+.container {
+  background-color: #242424;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease-out;
+  width: 150px;
+}
+
+.container:hover {
+  background-color: #313131;
+  cursor: pointer;
+}
+
+.container:hover .img {
+  box-shadow: 0 0 15px 3px #242424;
+}

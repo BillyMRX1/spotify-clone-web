@@ -1,20 +1,5 @@
-.App {
-  display: flex;
-  flex-direction: column;
-}
-
-.App h1{
-  text-align: left;
-  margin: 30px 30px;
-}
-
-.App h3{
-  text-align: left;
-  margin: 10px 30px;
-}
-
-body{
+body {
   background-color: rgb(29, 29, 29);
   color: white;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }

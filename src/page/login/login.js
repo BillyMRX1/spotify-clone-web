@@ -1,8 +1,9 @@
+import "../../components/button/style.css";
+
 const LoginPage = (props) => {
   return (
-    <div>
-      <h1>Spotify Clone</h1>
-      <a href={props.auth_link} className="btn">
+    <div className="center">
+      <a href={props.auth_link} className="btn-login">
         Login
       </a>
     </div>

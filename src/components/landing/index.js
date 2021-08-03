@@ -3,6 +3,8 @@ import axios from "axios";
 import { useState } from "react";
 import FormPlaylistComponent from "../formplaylist/index";
 import { useSelector } from "react-redux";
+import UserComponent from "../user";
+import "./style.css";
 
 const LandingComponent = () => {
   const token = useSelector((state) => state.token.token);
@@ -10,6 +12,7 @@ const LandingComponent = () => {
   const [result, setResult] = useState([]);
   const [trackSelect, setSelectedTrack] = useState([]);
   const [userId, setUserId] = useState("");
+  const [userName, setUserName] = useState("");
 
   const getQuery = () => {
     const auth = {
@@ -47,6 +50,7 @@ const LandingComponent = () => {
         },
       });
       setUserId(response.data.id);
+      setUserName(response.data.display_name);
     } catch (error) {
       console.error(error);
     }
@@ -56,6 +60,9 @@ const LandingComponent = () => {
 
   return (
     <div>
+      <div>
+        <UserComponent userName={userName} />
+      </div>
       <h1>Create Playlist</h1>
       <div>
         <FormPlaylistComponent
@@ -67,7 +74,7 @@ const LandingComponent = () => {
       <div>
         <h1>Search</h1>
         <input type="text" className="search_bar" onChange={handleSearch} />
-        <button onClick={getQuery} className="btn">
+        <button onClick={getQuery} className="btn-form">
           Search
         </button>
       </div>

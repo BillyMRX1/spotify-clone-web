@@ -1,6 +1,5 @@
 import Title from "../title";
 import Album from "../album";
-import "./style.css";
 
 function index(props) {
   const { title, artist, album } = props;

@@ -91,7 +91,7 @@ const FormPlaylistComponent = (props) => {
           className="search_bar"
           onChange={handleDescription}
         ></input>
-        <button onClick={handleSubmit} className="btn">
+        <button onClick={handleSubmit} className="btn-form">
           Create
         </button>
       </form>

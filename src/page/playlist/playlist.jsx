@@ -1,12 +1,11 @@
-import PlaylistComponent from '../../components/landing/index'
-import './style.css';
+import PlaylistComponent from "../../components/landing/index";
 
 const PlaylistPage = () => {
-    return(
-      <div>
-          <PlaylistComponent/>
-      </div>
-    )
-}
+  return (
+    <div>
+      <PlaylistComponent />
+    </div>
+  );
+};
 
 export default PlaylistPage;

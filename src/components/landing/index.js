@@ -4,7 +4,34 @@ import { useState } from "react";
 import FormPlaylistComponent from "../formplaylist/index";
 import { useSelector } from "react-redux";
 import UserComponent from "../user";
+import TextField from "@material-ui/core/TextField";
+import { Button, Container, makeStyles, Typography } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 import "./style.css";
+
+const useStyles = makeStyles({
+  textField: {
+    backgroundColor: "white",
+    marginLeft: 30,
+    width: "90%",
+    borderRadius: 4,
+  },
+  btnSearch: {
+    "&:hover": {
+      backgroundColor: "green",
+    },
+    alignContent: "center",
+  },
+  textH4: {
+    marginLeft: 30,
+    marginTop: 30,
+    marginBottom: 20,
+    fontWeight: "bold",
+  },
+  searchContainer: {
+    display: "flex",
+  },
+});
 
 const LandingComponent = () => {
   const token = useSelector((state) => state.token.token);
@@ -13,8 +40,12 @@ const LandingComponent = () => {
   const [trackSelect, setSelectedTrack] = useState([]);
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
+  const [profilePic, setProfilePic] = useState("");
+  const classes = useStyles();
 
-  const getQuery = () => {
+  const getQuery = (e) => {
+    e.preventDefault();
+
     const auth = {
       headers: { Authorization: `Bearer ${token}` },
     };
@@ -50,6 +81,7 @@ const LandingComponent = () => {
         },
       });
       setUserId(response.data.id);
+      setProfilePic(response.data.images[0].url);
       setUserName(response.data.display_name);
     } catch (error) {
       console.error(error);
@@ -60,24 +92,52 @@ const LandingComponent = () => {
 
   return (
     <div>
-      <div>
-        <UserComponent userName={userName} />
+      <div className="grid-playlist">
+        <div>
+          <Typography className={classes.textH4} variant="h4">
+            Create Playlist
+          </Typography>
+          <FormPlaylistComponent
+            userId={userId}
+            token={`Bearer ${token}`}
+            data={trackSelect}
+          />
+        </div>
+        <div className="user-container">
+          <UserComponent userName={userName} profilePic={profilePic} />
+        </div>
       </div>
-      <h1>Create Playlist</h1>
-      <div>
-        <FormPlaylistComponent
-          userId={userId}
-          token={`Bearer ${token}`}
-          data={trackSelect}
-        />
-      </div>
-      <div>
-        <h1>Search</h1>
-        <input type="text" className="search_bar" onChange={handleSearch} />
-        <button onClick={getQuery} className="btn-form">
-          Search
-        </button>
-      </div>
+      <Container maxWidth="false" disableGutters>
+        <form noValidate autoComplete="off" onSubmit={getQuery}>
+          <Typography className={classes.textH4} variant="h4">
+            Search
+          </Typography>
+          <Container
+            maxWidth="false"
+            disableGutters
+            className={classes.searchContainer}
+          >
+            <TextField
+              className={classes.textField}
+              type="text"
+              variant="filled"
+              color="primary"
+              label="Search Song"
+              onChange={handleSearch}
+            />
+            <Button
+              className={classes.btnSearch}
+              onClick={getQuery}
+              color="primary"
+              variant="contained"
+              size="large"
+              endIcon={<SearchIcon />}
+            >
+              Search
+            </Button>
+          </Container>
+        </form>
+      </Container>
       <div className="card-music">
         {result.map((music) => (
           <CardComponent

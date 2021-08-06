@@ -1,14 +1,42 @@
 import axios from "axios";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import TextField from "@material-ui/core/TextField";
+import { Button, makeStyles, Typography } from "@material-ui/core";
+import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
+
+const useStyles = makeStyles({
+  textField: {
+    backgroundColor: "white",
+    marginLeft: 30,
+    marginBottom: 10,
+    width: 300,
+    borderRadius: 4,
+  },
+  textH6: {
+    marginTop: 10,
+    marginLeft: 30,
+  },
+  btnSubmit: {
+    display: "flex",
+    marginLeft: 30,
+    marginTop: 10,
+    "&:hover": {
+      backgroundColor: "green",
+    },
+  },
+});
 
 const FormPlaylistComponent = (props) => {
   const { userId, data } = props;
   const token = `Bearer ${useSelector((state) => state.token.token)}`;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [titleError, setTitleError] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
   const minimumTitle = 10;
   const minimumDescription = 20;
+  const classes = useStyles();
 
   const handleTitle = (e) => {
     setTitle(e.target.value);
@@ -66,9 +94,15 @@ const FormPlaylistComponent = (props) => {
         console.error(error);
       }
     };
+
+    setTitleError(false);
+    setDescriptionError(false);
+
     if (title.length < minimumTitle) {
+      setTitleError(true);
       alert("Minimum Title 10 Character");
     } else if (description.length < minimumDescription) {
+      setDescriptionError(true);
       alert("Minimum Description 20 Character");
     } else {
       submitPlaylist();
@@ -78,22 +112,45 @@ const FormPlaylistComponent = (props) => {
 
   return (
     <div>
-      <form>
-        <h3>Title:</h3>
-        <input
+      <form noValidate autoComplete="off">
+        <Typography className={classes.textH6} variant="h6">
+          Title:
+        </Typography>
+        <TextField
+          className={classes.textField}
           type="text"
-          className="search_bar"
+          variant="filled"
+          color="primary"
+          label="Playlist Title"
+          required
+          error={titleError}
           onChange={handleTitle}
-        ></input>
-        <h3>Description:</h3>
-        <input
+        ></TextField>
+        <Typography className={classes.textH6} variant="h6">
+          Description:
+        </Typography>
+        <TextField
+          className={classes.textField}
           type="text"
-          className="search_bar"
+          variant="filled"
+          color="primary"
+          label="Playlist Description"
+          required
+          multiline
+          rows={3}
+          error={descriptionError}
           onChange={handleDescription}
-        ></input>
-        <button onClick={handleSubmit} className="btn-form">
+        ></TextField>
+        <Button
+          onClick={handleSubmit}
+          className={classes.btnSubmit}
+          color="primary"
+          variant="contained"
+          size="large"
+          endIcon={<CreateNewFolderIcon />}
+        >
           Create
-        </button>
+        </Button>
       </form>
     </div>
   );

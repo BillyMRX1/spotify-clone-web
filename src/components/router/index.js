@@ -37,8 +37,9 @@ const SpotifyRoute = () => {
   const componentDidMount = () => {
     const hash = getHash();
     const temp = hash.access_token;
+    localStorage.setItem("token", temp);
     if (temp) {
-      dispatch(setToken(temp));
+      dispatch(setToken(localStorage.getItem("token")));
     }
   };
 

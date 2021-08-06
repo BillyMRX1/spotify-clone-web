@@ -1,9 +1,22 @@
-import "./style.css";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  textH4: {
+    marginBottom: 20,
+    marginTop: 20,
+    fontWeight: "bold",
+  },
+});
 
 const HeaderComponent = () => {
+  const classes = useStyles();
+
   return (
     <div>
-      <h1 className="header-title">Spotify Clone</h1>
+      <Typography className={classes.textH4} align="center" variant="h4">
+        Spotify Clone
+      </Typography>
     </div>
   );
 };

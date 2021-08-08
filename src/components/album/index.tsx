@@ -9,7 +9,12 @@ const useStyles = makeStyles({
   },
 });
 
-function index(props) {
+interface AlbumProps{
+  artist: string
+  album: string
+}
+
+const AlbumComponent: React.FC<AlbumProps> = (props: AlbumProps) => {
   const { artist, album } = props;
   const classes = useStyles();
   return (
@@ -20,4 +25,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default AlbumComponent;

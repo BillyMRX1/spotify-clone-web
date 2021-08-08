@@ -1,7 +1,13 @@
 import Title from "../title";
 import Album from "../album";
 
-function index(props) {
+interface ContentProps{
+  title: string
+  artist: string
+  album: string
+}
+
+const ContentComponent: React.FC<ContentProps> = (props: ContentProps) => {
   const { title, artist, album } = props;
   return (
     <div className="music-contents">
@@ -11,4 +17,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default ContentComponent;

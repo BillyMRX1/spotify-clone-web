@@ -36,6 +36,7 @@ const UserComponent = (props) => {
 
   const handleLogout = () => {
     localStorage.clear();
+    localStorage.setItem("token", " ");
     window.location.href = "/";
   };
   return (

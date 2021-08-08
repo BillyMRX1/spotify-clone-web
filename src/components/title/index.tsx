@@ -9,7 +9,11 @@ const useStyles = makeStyles({
   },
 });
 
-function index(props) {
+interface TitleProps{
+  title: string
+}
+
+const TitleComponent: React.FC<TitleProps> = (props: TitleProps) => {
   const classes = useStyles();
   return (
     <Typography className={classes.textH6} variant="h6">
@@ -18,4 +22,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default TitleComponent;

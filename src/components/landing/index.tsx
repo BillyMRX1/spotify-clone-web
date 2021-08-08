@@ -1,8 +1,7 @@
 import CardComponent from "../card/index";
 import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
 import FormPlaylistComponent from "../formplaylist/index";
-import { useSelector } from "react-redux";
 import UserComponent from "../user";
 import TextField from "@material-ui/core/TextField";
 import { Button, Container, makeStyles, Typography } from "@material-ui/core";
@@ -33,17 +32,48 @@ const useStyles = makeStyles({
   },
 });
 
-const LandingComponent = () => {
-  const token = useSelector((state) => state.token.token);
+  // key={music.id}
+  // image_url={music.album.images[1].url}
+  // title={music.name}
+  // artist={music.artists[0].name}
+  // album={music.album.name}
+  // selected={trackSelect.some((id) => id === music.uri)}
+  // onSelect={() => handleSelect(music.uri)}
+  // onDeselect={() => handleDeselect(music.uri)}
+
+
+interface MusicProps {
+  album: Album;
+  artists: Artist[];
+  id: string;          
+  name: string;      
+  uri: string;
+}
+
+interface Album {
+  images: Image[];
+  name: string;
+}
+
+interface Image {
+  url: string;
+}
+
+interface Artist {
+  name: string;
+}
+
+const LandingComponent: React.FC = () => {
+  const token = localStorage.getItem("token");
   const [search, setSearch] = useState("");
   const [result, setResult] = useState([]);
-  const [trackSelect, setSelectedTrack] = useState([]);
+  const [trackSelect, setSelectedTrack] = useState<string[]>([]);
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [profilePic, setProfilePic] = useState("");
   const classes = useStyles();
 
-  const getQuery = (e) => {
+  const getQuery = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
     const auth = {
@@ -58,15 +88,15 @@ const LandingComponent = () => {
       });
   };
 
-  const handleSearch = (query) => {
+  const handleSearch = (query: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(query.target.value);
   };
 
-  const handleSelect = (id) => {
+  const handleSelect = (id: string) => {
     setSelectedTrack([...trackSelect, id]);
   };
 
-  const handleDeselect = (id) => {
+  const handleDeselect = (id: string) => {
     const selectedTrack = trackSelect.filter((track) => track !== id);
     setSelectedTrack([...selectedTrack]);
   };
@@ -107,13 +137,13 @@ const LandingComponent = () => {
           <UserComponent userName={userName} profilePic={profilePic} />
         </div>
       </div>
-      <Container maxWidth="false" disableGutters>
+      <Container maxWidth={false} disableGutters>
         <form noValidate autoComplete="off" onSubmit={getQuery}>
           <Typography className={classes.textH4} variant="h4">
             Search
           </Typography>
           <Container
-            maxWidth="false"
+            maxWidth={false}
             disableGutters
             className={classes.searchContainer}
           >
@@ -139,7 +169,7 @@ const LandingComponent = () => {
         </form>
       </Container>
       <div className="card-music">
-        {result.map((music) => (
+        {result.map((music: MusicProps) => (
           <CardComponent
             key={music.id}
             image_url={music.album.images[1].url}

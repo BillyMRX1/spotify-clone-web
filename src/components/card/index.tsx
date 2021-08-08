@@ -4,7 +4,17 @@ import Contents from "../contents";
 import Button from "../button";
 import "./style.css";
 
-function CardComponent(props) {
+interface CardProps{
+    image_url: string
+    title: string
+    artist: string
+    album: string
+    selected: boolean
+    onSelect: () => void;
+    onDeselect: () => void;
+}
+
+const CardComponent: React.FC<CardProps> = (props: CardProps) => {
   const { image_url, title, artist, album, selected, onSelect, onDeselect } =
     props;
   return (

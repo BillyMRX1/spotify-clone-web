@@ -37,9 +37,9 @@ const SpotifyRoute = () => {
   const componentDidMount = () => {
     const hash = getHash();
     const temp = hash.access_token;
-    localStorage.setItem("token", temp);
     if (temp) {
-      dispatch(setToken(localStorage.getItem("token")));
+      dispatch(setToken(temp));
+      localStorage.setItem("token", temp);
     }
   };
 
@@ -50,7 +50,11 @@ const SpotifyRoute = () => {
     <Router>
       <Switch>
         <Route path="/create-playlist">
-          {token === " " ? <Redirect to="/" /> : <PlaylistPage />}
+          {localStorage.getItem("token") === " " ? (
+            <Redirect to="/" />
+          ) : (
+            <PlaylistPage />
+          )}
         </Route>
         <Route path="/">
           {token === " " ? (

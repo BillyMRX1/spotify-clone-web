@@ -7,7 +7,13 @@ const useStyles = makeStyles({
   btnSelect: {},
 });
 
-function index(props) {
+interface ButtonProps{
+  selected: boolean
+  onSelect: () => void;
+  onDeselect: () => void;
+}
+
+const ButtonComponent: React.FC<ButtonProps> = (props: ButtonProps) => {
   const { selected, onSelect, onDeselect } = props;
   const value = selected ? "Deselect" : "Select";
   const classes = useStyles();
@@ -27,4 +33,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default ButtonComponent;

@@ -19,8 +19,8 @@ const AlbumComponent: React.FC<AlbumProps> = (props: AlbumProps) => {
   const classes = useStyles();
   return (
     <div>
-      <Typography className={classes.text}>{artist}</Typography>
-      <Typography className={classes.text}>{album}</Typography>
+      <Typography className={classes.text} data-testid="display-artist">{artist}</Typography>
+      <Typography className={classes.text} data-testid="display-album">{album}</Typography>
     </div>
   );
 }

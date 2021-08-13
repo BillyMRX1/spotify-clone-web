@@ -40,6 +40,7 @@ const SpotifyRoute = () => {
     if (temp) {
       dispatch(setToken(temp));
       localStorage.setItem("token", temp);
+      console.log(temp);
     }
   };
 

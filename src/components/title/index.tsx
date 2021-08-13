@@ -16,7 +16,7 @@ interface TitleProps{
 const TitleComponent: React.FC<TitleProps> = (props: TitleProps) => {
   const classes = useStyles();
   return (
-    <Typography className={classes.textH6} variant="h6">
+    <Typography className={classes.textH6} variant="h6" data-testid="display-title">
       {props.title}
     </Typography>
   );

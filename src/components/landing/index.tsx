@@ -32,16 +32,6 @@ const useStyles = makeStyles({
   },
 });
 
-  // key={music.id}
-  // image_url={music.album.images[1].url}
-  // title={music.name}
-  // artist={music.artists[0].name}
-  // album={music.album.name}
-  // selected={trackSelect.some((id) => id === music.uri)}
-  // onSelect={() => handleSelect(music.uri)}
-  // onDeselect={() => handleDeselect(music.uri)}
-
-
 interface MusicProps {
   album: Album;
   artists: Artist[];
@@ -154,6 +144,7 @@ const LandingComponent: React.FC = () => {
               color="primary"
               label="Search Song"
               onChange={handleSearch}
+              data-testid="search-bar"
             />
             <Button
               className={classes.btnSearch}

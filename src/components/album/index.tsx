@@ -1,6 +1,6 @@
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
-import "./style.css";
+import { Typography, makeStyles } from '@material-ui/core';
+
+import './style.css';
 
 const useStyles = makeStyles({
   text: {
@@ -23,6 +23,6 @@ const AlbumComponent: React.FC<AlbumProps> = (props: AlbumProps) => {
       <Typography className={classes.text} data-testid="display-album">{album}</Typography>
     </div>
   );
-}
+};
 
 export default AlbumComponent;

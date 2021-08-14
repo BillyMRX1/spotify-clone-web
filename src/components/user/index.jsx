@@ -3,32 +3,32 @@ import {
   makeStyles,
   Avatar,
   Container,
-  Button,
-} from "@material-ui/core";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+  Button
+} from '@material-ui/core';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const useStyles = makeStyles({
   textH4: {
-    textAlign: "center",
+    textAlign: 'center',
     marginTop: 30,
-    marginBottom: 20,
+    marginBottom: 20
   },
   profilePic: {
-    display: "block",
-    marginLeft: "auto",
-    marginRight: "auto",
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     marginTop: 30,
     height: 150,
-    width: 150,
+    width: 150
   },
   btnLogout: {
-    display: "flex",
-    marginLeft: "auto",
-    marginRight: "auto",
-    "&:hover": {
-      backgroundColor: "green",
-    },
-  },
+    display: 'flex',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    '&:hover': {
+      backgroundColor: 'green'
+    }
+  }
 });
 
 const UserComponent = (props) => {
@@ -36,8 +36,8 @@ const UserComponent = (props) => {
 
   const handleLogout = () => {
     localStorage.clear();
-    localStorage.setItem("token", " ");
-    window.location.href = "/";
+    localStorage.setItem('token', ' ');
+    window.location.href = '/';
   };
   return (
     <Container disableGutters>

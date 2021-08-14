@@ -1,50 +1,51 @@
-import { render, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import LandingComponent from "..";
-import store from "../../redux/store/store";
+import { fireEvent, render, screen } from '@testing-library/react';
+import { setupServer } from 'msw/node';
+import { rest } from 'msw';
+import { Provider } from 'react-redux';
+import LandingComponent from '..';
+import store from '../../redux/store/store';
 
-test("Check components render correctly", () => {
+const tracks = {
+  items: [
+    {
+      album: {
+        images: [
+          {
+            url: 'https://i.scdn.co/image/ab67616d0000b273e8b066f70c206551210d902b',
+          },
+          {
+            url: 'https://i.scdn.co/image/ab67616d0000b273e8b066f70c206551210d902b',
+          },
+        ],
+        name: 'Bohemian Rhapsody (The Original Soundtrack)',
+      },
+      artists: [
+        {
+          name: 'Queen',
+        },
+      ],
+      id: '7xHATAMD7ezTZGYsNAMr5R',
+      name: 'Bohemian Rhapsody - Live Aid',
+      uri: 'spotify:track:7xHATAMD7ezTZGYsNAMr5R',
+    },
+  ],
+};
+
+const server = setupServer(
+  rest.get('https://api.spotify.com/v1/search', (req, res, ctx) => res(ctx.json({ tracks }))),
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+it('Should render track list', async () => {
   render(
     <Provider store={store}>
       <LandingComponent />
-    </Provider>
+    </Provider>,
   );
-
-  const search = screen.getByTestId("search-bar");
-  expect(search).toBeInTheDocument();
-});
-
-const getTrackList = async (query, token) => {
-  const url = `https://api.spotify.com/v1/search?q=${query}&type=track`;
-  if (query !== "") {
-    const trackData = await fetch(url, {
-      headers: {
-        Authorization: "Bearer " + token.access_token,
-      },
-    }).then((res) => res.json());
-    return trackData.tracks.items[0].name;
-  }
-};
-
-global.fetch = jest.fn(
-  () =>
-    Promise.resolve({
-      json: () =>
-        Promise.resolve({
-          tracks: { items: { 0: { name: "into the night" } } },
-        }),
-    }),
-  Promise.reject("rejected")
-);
-
-test("Mocking search API", async () => {
-  const token = {
-    access_token:
-      "BQABHOB_GVHxBkxJOETW55B6x1MxPBi9oeqtru2Gz6fFHA5Hd-6T4GTogMlzTh0EGzZ_cvKBHnICksLdPpy5rf1LGUFrtOUt84UvgbfsriIeVBKNIdwc6nkHcw_rSOO-fvjy0GFm7daqDBKxiQAicj61CGq0HVKTicAOLHt9l_IuMw",
-    token_type: "Bearer",
-    expires_in: "3600",
-  };
-  const data = getTrackList("YOASOBI", token);
-  expect(data).toBeDefined();
-  expect(fetch).toHaveBeenCalledTimes(1);
+  const btnSearch = screen.getByTestId('btn-search');
+  fireEvent.click(btnSearch);
+  expect(await screen.findAllByTestId('track-component')).toHaveLength(1);
 });

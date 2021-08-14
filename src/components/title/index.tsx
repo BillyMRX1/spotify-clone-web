@@ -1,10 +1,9 @@
-import { Typography } from "@material-ui/core";
-import "./style.css";
-import { makeStyles } from "@material-ui/core";
+import { Typography, makeStyles } from '@material-ui/core';
+import './style.css';
 
 const useStyles = makeStyles({
   textH6: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginTop: 10,
   },
 });
@@ -20,6 +19,6 @@ const TitleComponent: React.FC<TitleProps> = (props: TitleProps) => {
       {props.title}
     </Typography>
   );
-}
+};
 
 export default TitleComponent;

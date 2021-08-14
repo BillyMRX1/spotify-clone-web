@@ -3,11 +3,11 @@ import {
   Switch,
   Route,
   Redirect,
-} from "react-router-dom";
-import PlaylistPage from "../../page/playlist/playlist";
-import LoginPage from "../../page/login/login";
-import { useDispatch, useSelector } from "react-redux";
-import { setToken } from "../redux/reducer/reducer";
+} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import PlaylistPage from '../../page/playlist/playlist';
+import LoginPage from '../../page/login/login';
+import { setToken } from '../redux/reducer/reducer';
 
 const SpotifyRoute = () => {
   const client_id = process.env.REACT_APP_CLIENT_ID;
@@ -20,16 +20,16 @@ const SpotifyRoute = () => {
   const getHash = () => {
     const hash = window.location.hash
       .substring(1)
-      .split("&")
-      .reduce(function (initial, item) {
+      .split('&')
+      .reduce((initial, item) => {
         if (item) {
-          var parts = item.split("=");
+          const parts = item.split('=');
           initial[parts[0]] = decodeURIComponent(parts[1]);
         }
         return initial;
       }, {});
 
-    window.location.hash = "";
+    window.location.hash = '';
 
     return hash;
   };
@@ -39,7 +39,7 @@ const SpotifyRoute = () => {
     const temp = hash.access_token;
     if (temp) {
       dispatch(setToken(temp));
-      localStorage.setItem("token", temp);
+      localStorage.setItem('token', temp);
       console.log(temp);
     }
   };
@@ -51,14 +51,14 @@ const SpotifyRoute = () => {
     <Router>
       <Switch>
         <Route path="/create-playlist">
-          {localStorage.getItem("token") === " " ? (
+          {localStorage.getItem('token') === ' ' ? (
             <Redirect to="/" />
           ) : (
             <PlaylistPage />
           )}
         </Route>
         <Route path="/">
-          {token === " " ? (
+          {token === ' ' ? (
             <LoginPage auth_link={auth_link} />
           ) : (
             <Redirect to="/create-playlist" />

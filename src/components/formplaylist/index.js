@@ -1,37 +1,37 @@
-import axios from "axios";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import TextField from "@material-ui/core/TextField";
-import { Button, makeStyles, Typography } from "@material-ui/core";
-import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
+import axios from 'axios';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import TextField from '@material-ui/core/TextField';
+import { Button, makeStyles, Typography } from '@material-ui/core';
+import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
 
 const useStyles = makeStyles({
   textField: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     marginLeft: 30,
     marginBottom: 10,
     width: 300,
-    borderRadius: 4,
+    borderRadius: 4
   },
   textH6: {
     marginTop: 10,
-    marginLeft: 30,
+    marginLeft: 30
   },
   btnSubmit: {
-    display: "flex",
+    display: 'flex',
     marginLeft: 30,
     marginTop: 10,
-    "&:hover": {
-      backgroundColor: "green",
-    },
-  },
+    '&:hover': {
+      backgroundColor: 'green'
+    }
+  }
 });
 
 const FormPlaylistComponent = (props) => {
   const { userId, data } = props;
   const token = `Bearer ${useSelector((state) => state.token.token)}`;
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [titleError, setTitleError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const minimumTitle = 10;
@@ -46,6 +46,26 @@ const FormPlaylistComponent = (props) => {
     setDescription(e.target.value);
   };
 
+  const addToPlaylist = async (playlistId) => {
+    try {
+      const response = await axios.post(
+        `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+        {
+          uris: data
+        },
+        {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const endpoint = `https://api.spotify.com/v1/users/${userId}/playlists`;
@@ -56,40 +76,21 @@ const FormPlaylistComponent = (props) => {
             endpoint,
             {
               name: title,
-              description: description,
+              description,
               collaborative: false,
-              public: false,
+              public: false
             },
             {
               headers: {
                 Authorization: token,
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+              }
             }
           )
           .then((response) => {
             addToPlaylist(response.data.id);
           });
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    const addToPlaylist = async (playlistId) => {
-      try {
-        const response = await axios.post(
-          `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
-          {
-            uris: data,
-          },
-          {
-            headers: {
-              Authorization: token,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        console.log(response);
       } catch (error) {
         console.error(error);
       }
@@ -100,13 +101,13 @@ const FormPlaylistComponent = (props) => {
 
     if (title.length < minimumTitle) {
       setTitleError(true);
-      alert("Minimum Title 10 Character");
+      alert('Minimum Title 10 Character');
     } else if (description.length < minimumDescription) {
       setDescriptionError(true);
-      alert("Minimum Description 20 Character");
+      alert('Minimum Description 20 Character');
     } else {
       submitPlaylist();
-      alert("Playlist Created!");
+      alert('Playlist Created!');
     }
   };
 
@@ -125,7 +126,7 @@ const FormPlaylistComponent = (props) => {
           required
           error={titleError}
           onChange={handleTitle}
-        ></TextField>
+        />
         <Typography className={classes.textH6} variant="h6">
           Description:
         </Typography>
@@ -140,7 +141,7 @@ const FormPlaylistComponent = (props) => {
           rows={3}
           error={descriptionError}
           onChange={handleDescription}
-        ></TextField>
+        />
         <Button
           onClick={handleSubmit}
           className={classes.btnSubmit}

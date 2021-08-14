@@ -1,11 +1,11 @@
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core";
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
   textH4: {
     marginBottom: 20,
     marginTop: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });
 

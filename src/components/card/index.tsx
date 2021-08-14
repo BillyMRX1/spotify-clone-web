@@ -1,8 +1,8 @@
-import React from "react";
-import Image from "../image";
-import Contents from "../contents";
-import Button from "../button";
-import "./style.css";
+import React from 'react';
+import Image from '../image';
+import Contents from '../contents';
+import Button from '../button';
+import './style.css';
 
 interface CardProps{
     image_url: string
@@ -15,10 +15,11 @@ interface CardProps{
 }
 
 const CardComponent: React.FC<CardProps> = (props: CardProps) => {
-  const { image_url, title, artist, album, selected, onSelect, onDeselect } =
-    props;
+  const {
+    image_url, title, artist, album, selected, onSelect, onDeselect,
+  } = props;
   return (
-    <div className="card">
+    <div className="card" data-testid="track-component">
       <div className="container">
         <Image src={image_url} />
         <Contents title={title} artist={artist} album={album} />
@@ -30,6 +31,6 @@ const CardComponent: React.FC<CardProps> = (props: CardProps) => {
       </div>
     </div>
   );
-}
+};
 
 export default CardComponent;

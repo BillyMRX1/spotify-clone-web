@@ -1,15 +1,15 @@
-import SpotifyRoute from "./components/router/index";
-import HeaderComponent from "./components/header";
-import { createTheme, ThemeProvider } from "@material-ui/core";
-import "./App.css";
+import { createTheme, ThemeProvider } from '@material-ui/core';
+import SpotifyRoute from './components/router/index';
+import HeaderComponent from './components/header';
+import './App.css';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#00AA13",
+      main: '#00AA13',
     },
     secondary: {
-      main: "#EE2737",
+      main: '#EE2737',
     },
   },
 });

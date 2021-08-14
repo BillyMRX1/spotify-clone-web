@@ -1,6 +1,6 @@
 function setToken(token) {
   return {
-    type: "set_token",
+    type: 'set_token',
     payload: token,
   };
 }

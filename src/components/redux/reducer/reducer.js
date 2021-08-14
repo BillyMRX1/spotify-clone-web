@@ -1,9 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export const tokenReducer = createSlice({
-  name: "set_token",
+  name: 'set_token',
   initialState: {
-    token: " ",
+    token: ' ',
   },
   reducers: {
     setToken: (state, action) => {

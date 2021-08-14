@@ -1,42 +1,44 @@
-import CardComponent from "../card/index";
-import axios from "axios";
-import React, { useState } from "react";
-import FormPlaylistComponent from "../formplaylist/index";
-import UserComponent from "../user";
-import TextField from "@material-ui/core/TextField";
-import { Button, Container, makeStyles, Typography } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
-import "./style.css";
+import axios from 'axios';
+import React, { useState } from 'react';
+import TextField from '@material-ui/core/TextField';
+import {
+  Button, Container, makeStyles, Typography,
+} from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import UserComponent from '../user';
+import FormPlaylistComponent from '../formplaylist/index';
+import CardComponent from '../card/index';
+import './style.css';
 
 const useStyles = makeStyles({
   textField: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     marginLeft: 30,
-    width: "90%",
+    width: '90%',
     borderRadius: 4,
   },
   btnSearch: {
-    "&:hover": {
-      backgroundColor: "green",
+    '&:hover': {
+      backgroundColor: 'green',
     },
-    alignContent: "center",
+    alignContent: 'center',
   },
   textH4: {
     marginLeft: 30,
     marginTop: 30,
     marginBottom: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   searchContainer: {
-    display: "flex",
+    display: 'flex',
   },
 });
 
 interface MusicProps {
   album: Album;
   artists: Artist[];
-  id: string;          
-  name: string;      
+  id: string;
+  name: string;
   uri: string;
 }
 
@@ -54,13 +56,13 @@ interface Artist {
 }
 
 const LandingComponent: React.FC = () => {
-  const token = localStorage.getItem("token");
-  const [search, setSearch] = useState("");
+  const token = localStorage.getItem('token');
+  const [search, setSearch] = useState('');
   const [result, setResult] = useState([]);
   const [trackSelect, setSelectedTrack] = useState<string[]>([]);
-  const [userId, setUserId] = useState("");
-  const [userName, setUserName] = useState("");
-  const [profilePic, setProfilePic] = useState("");
+  const [userId, setUserId] = useState('');
+  const [userName, setUserName] = useState('');
+  const [profilePic, setProfilePic] = useState('');
   const classes = useStyles();
 
   const getQuery = (e: { preventDefault: () => void; }) => {
@@ -93,11 +95,11 @@ const LandingComponent: React.FC = () => {
 
   const getUserId = async () => {
     try {
-      const response = await axios.get("https://api.spotify.com/v1/me", {
+      const response = await axios.get('https://api.spotify.com/v1/me', {
         headers: {
           Authorization: `Bearer ${token}`,
-          Accept: "application/json",
-          "Content-Type": "application/json",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
       });
       setUserId(response.data.id);
@@ -153,6 +155,7 @@ const LandingComponent: React.FC = () => {
               variant="contained"
               size="large"
               endIcon={<SearchIcon />}
+              data-testid="btn-search"
             >
               Search
             </Button>

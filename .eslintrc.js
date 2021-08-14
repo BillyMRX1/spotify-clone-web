@@ -4,42 +4,43 @@ module.exports = {
     es2021: true,
     jest: true,
     node: true,
-    es6: true,
+    es6: true
   },
-  extends: ["eslint:recommended", "plugin:react/recommended"],
+  extends: ['eslint:recommended', 'plugin:react/recommended'],
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     },
     ecmaVersion: 12,
-    sourceType: "module",
+    sourceType: 'module'
   },
-  plugins: ["react"],
+  plugins: ['react'],
   rules: {
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off",
+    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
+    'linebreak-style': 'off'
   },
   settings: {
     react: {
-      version: "detect",
-    },
+      version: 'detect'
+    }
   },
   overrides: [
     {
-      files: ["**/*.ts", "**/*.tsx"],
+      files: ['**/*.ts', '**/*.tsx'],
       extends: [
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended'
       ],
-      parser: "@typescript-eslint/parser",
+      parser: '@typescript-eslint/parser',
       parserOptions: {
         ecmaFeatures: {
-          jsx: true,
+          jsx: true
         },
         ecmaVersion: 12,
-        sourceType: "module",
+        sourceType: 'module'
       },
-      plugins: ["@typescript-eslint"],
-    },
-  ],
+      plugins: ['@typescript-eslint']
+    }
+  ]
 };

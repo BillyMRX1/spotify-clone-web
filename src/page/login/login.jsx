@@ -1,19 +1,19 @@
-import "../../components/button/style.css";
-import Button from "@material-ui/core/Button";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import Container from "@material-ui/core/Container";
-import { makeStyles } from "@material-ui/core";
+import '../../components/button/style.css';
+import Button from '@material-ui/core/Button';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
   btnLogin: {
-    "&:hover": {
-      backgroundColor: "green",
+    '&:hover': {
+      backgroundColor: 'green',
     },
   },
   containerLogin: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

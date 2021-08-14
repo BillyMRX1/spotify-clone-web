@@ -12,7 +12,7 @@ import { setToken } from '../redux/reducer/reducer';
 const SpotifyRoute = () => {
   const client_id = process.env.REACT_APP_CLIENT_ID;
   const scope = process.env.REACT_APP_SCOPE;
-  const redirect = 'https://spotify-clone-brown.vercel.app/';
+  const redirect = process.env.REACT_APP_REDIRECT;
   const auth_link = `https://accounts.spotify.com/id/authorize?response_type=token&client_id=${client_id}&scope=${scope}&redirect_uri=${redirect}&show_dialog=true`;
   const token = useSelector((state) => state.token.token);
   const dispatch = useDispatch();

@@ -2,7 +2,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
+  Redirect
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PlaylistPage from '../../page/playlist/playlist';
@@ -12,7 +12,7 @@ import { setToken } from '../redux/reducer/reducer';
 const SpotifyRoute = () => {
   const client_id = process.env.REACT_APP_CLIENT_ID;
   const scope = process.env.REACT_APP_SCOPE;
-  const redirect = process.env.REACT_APP_REDIRECT;
+  const redirect = 'https://spotify-clone-brown.vercel.app/';
   const auth_link = `https://accounts.spotify.com/id/authorize?response_type=token&client_id=${client_id}&scope=${scope}&redirect_uri=${redirect}&show_dialog=true`;
   const token = useSelector((state) => state.token.token);
   const dispatch = useDispatch();

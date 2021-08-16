@@ -1,3 +1,45 @@
 .header-title {
   text-align: center;
 }
+
+.nav-container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  min-height: 10vh;
+  align-items: center;
+  background-color: black;
+}
+
+nav .nav-link {
+  display: block;
+}
+
+nav .nav-link a {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+nav .logo {
+  display: flex;
+  align-items: center;
+}
+
+nav .logo img {
+  width: 15%;
+  height: 15%;
+  margin-left: 30px;
+}

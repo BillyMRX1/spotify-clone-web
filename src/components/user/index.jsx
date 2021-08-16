@@ -47,7 +47,7 @@ const UserComponent = (props) => {
         src={props.profilePic}
       />
       <Typography className={classes.textH4} variant="h4">
-        Welcome {props.userName}!
+        Hello {props.userName}!
       </Typography>
       <Button
         className={classes.btnLogout}

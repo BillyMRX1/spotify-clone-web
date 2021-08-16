@@ -113,7 +113,7 @@ const LandingComponent: React.FC = () => {
   getUserId();
 
   return (
-    <div>
+    <div className="playlist-layout">
       <div className="grid-playlist">
         <div>
           <Typography className={classes.textH4} variant="h4">

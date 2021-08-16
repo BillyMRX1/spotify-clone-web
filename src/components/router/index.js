@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PlaylistPage from '../../page/playlist/playlist';
 import LoginPage from '../../page/login/login';
 import { setToken } from '../redux/reducer/reducer';
+import ProfilePage from '../../page/profile/profile';
 
 const SpotifyRoute = () => {
   const client_id = process.env.REACT_APP_CLIENT_ID;
@@ -55,6 +56,13 @@ const SpotifyRoute = () => {
             <Redirect to="/" />
           ) : (
             <PlaylistPage />
+          )}
+        </Route>
+        <Route path="/profile">
+          {localStorage.getItem('token') === ' ' ? (
+            <Redirect to="/" />
+          ) : (
+            <ProfilePage />
           )}
         </Route>
         <Route path="/">

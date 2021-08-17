@@ -121,7 +121,6 @@ const LandingComponent: React.FC = () => {
           </Typography>
           <FormPlaylistComponent
             userId={userId}
-            token={`Bearer ${token}`}
             data={trackSelect}
           />
         </div>

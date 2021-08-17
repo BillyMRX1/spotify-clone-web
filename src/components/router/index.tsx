@@ -4,25 +4,25 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PlaylistPage from '../../page/playlist/playlist';
 import LoginPage from '../../page/login/login';
 import { setToken } from '../redux/reducer/reducer';
 import ProfilePage from '../../page/profile/profile';
+import { useEffect } from 'react';
 
-const SpotifyRoute = () => {
+const SpotifyRoute: React.FC = () => {
   const client_id = process.env.REACT_APP_CLIENT_ID;
   const scope = process.env.REACT_APP_SCOPE;
   const redirect = process.env.REACT_APP_REDIRECT;
   const auth_link = `https://accounts.spotify.com/id/authorize?response_type=token&client_id=${client_id}&scope=${scope}&redirect_uri=${redirect}&show_dialog=true`;
-  const token = useSelector((state) => state.token.token);
   const dispatch = useDispatch();
 
   const getHash = () => {
     const hash = window.location.hash
       .substring(1)
       .split('&')
-      .reduce((initial, item) => {
+      .reduce((initial: any, item) => {
         if (item) {
           const parts = item.split('=');
           initial[parts[0]] = decodeURIComponent(parts[1]);
@@ -35,19 +35,21 @@ const SpotifyRoute = () => {
     return hash;
   };
 
+  
+
   const componentDidMount = () => {
     const hash = getHash();
     const temp = hash.access_token;
     if (temp) {
       dispatch(setToken(temp));
-      localStorage.setItem('token', temp);
-      console.log(temp);
+      useEffect(() => {
+        localStorage.setItem('token', temp);
+      });
     }
   };
 
   componentDidMount();
 
-  console.log(token);
   return (
     <Router>
       <Switch>
@@ -66,7 +68,7 @@ const SpotifyRoute = () => {
           )}
         </Route>
         <Route path="/">
-          {token === ' ' ? (
+          {localStorage.getItem('token') === ' ' ? (
             <LoginPage auth_link={auth_link} />
           ) : (
             <Redirect to="/create-playlist" />

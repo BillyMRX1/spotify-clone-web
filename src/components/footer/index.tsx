@@ -7,7 +7,7 @@ const useStyles = makeStyles({
   }
 });
 
-const FooterComponent = () => {
+const FooterComponent: React.FC = () => {
   const classes = useStyles();
   return (
     <div className="nav-container">

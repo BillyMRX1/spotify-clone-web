@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   }
 });
 
-const HeaderComponent = () => {
+const HeaderComponent: React.FC = () => {
   const classes = useStyles();
   const handlePlaylist = () => {
     localStorage.getItem('token') === ' '
@@ -38,7 +38,7 @@ const HeaderComponent = () => {
         <ButtonGroup
           className={classes.navButtonGroup}
           variant="contained"
-          color="#ffffff"
+          color="primary"
         >
           <Button onClick={handlePlaylist}>Create Playlist</Button>
           <Button onClick={handleProfile}>Profile</Button>

@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import ImageComponent from '../image';
-import ButtonComponent from '../button';
-import TitleComponent from '../title';
-import AlbumComponent from '../album';
+import ImageComponent from '../../image';
+import ButtonComponent from '../../button';
+import TitleComponent from '../../title';
+import AlbumComponent from '../../album';
 
 test('Check Image', () => {
   render(<ImageComponent src="https://i.scdn.co/image/ab67616d00001e02c5716278abba6a103ad13aa7" />);
@@ -26,7 +26,7 @@ test('Check Track Album', () => {
 
 test('Check Button', () => {
   render(
-    <ButtonComponent selected={'spotify:track:3dPtXHP0oXQ4HCWHsOA9js' === 'spotify:track:3dPtXHP0oXQ4HCWHsOA9js'} onSelect={() => {}} onDeselect={() => {}} />,
+    <ButtonComponent selected={'spotify:track:3dPtXHP0oXQ4HCWHsOA9js' === 'spotify:track:3dPtXHP0oXQ4HCWHsOA9js'} onSelect={() => ""} onDeselect={() => ""} />,
   );
   const Button = screen.getByRole('button');
   fireEvent.click(Button);

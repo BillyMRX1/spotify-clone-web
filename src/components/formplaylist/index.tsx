@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import { Button, makeStyles, Typography } from '@material-ui/core';
 import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
@@ -27,9 +26,14 @@ const useStyles = makeStyles({
   }
 });
 
-const FormPlaylistComponent = (props) => {
+interface FormPlaylistProps{
+  userId: string
+  data: string[]
+}
+
+const FormPlaylistComponent: React.FC<FormPlaylistProps> = (props: FormPlaylistProps) => {
   const { userId, data } = props;
-  const token = `Bearer ${useSelector((state) => state.token.token)}`;
+  const token = `Bearer ${localStorage.getItem('token')}`;
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [titleError, setTitleError] = useState(false);
@@ -38,15 +42,15 @@ const FormPlaylistComponent = (props) => {
   const minimumDescription = 20;
   const classes = useStyles();
 
-  const handleTitle = (e) => {
+  const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
-  const handleDescription = (e) => {
+  const handleDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDescription(e.target.value);
   };
 
-  const addToPlaylist = async (playlistId) => {
+  const addToPlaylist = async (playlistId: string) => {
     try {
       const response = await axios.post(
         `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
@@ -66,7 +70,7 @@ const FormPlaylistComponent = (props) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const endpoint = `https://api.spotify.com/v1/users/${userId}/playlists`;
     const submitPlaylist = () => {
@@ -115,27 +119,27 @@ const FormPlaylistComponent = (props) => {
     <div>
       <form noValidate autoComplete="off">
         <Typography className={classes.textH6} variant="h6">
-          Title:
+          Playlist Title:
         </Typography>
         <TextField
           className={classes.textField}
           type="text"
           variant="filled"
           color="primary"
-          label="Playlist Title"
+          label="Minimum Character 10"
           required
           error={titleError}
           onChange={handleTitle}
         />
         <Typography className={classes.textH6} variant="h6">
-          Description:
+          Playlist Description:
         </Typography>
         <TextField
           className={classes.textField}
           type="text"
           variant="filled"
           color="primary"
-          label="Playlist Description"
+          label="Minimum Character 20"
           required
           multiline
           rows={3}

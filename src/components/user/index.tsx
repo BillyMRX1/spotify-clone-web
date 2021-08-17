@@ -31,7 +31,12 @@ const useStyles = makeStyles({
   }
 });
 
-const UserComponent = (props) => {
+interface UserComponentProps{
+  profilePic: string
+  userName: string
+}
+
+const UserComponent: React.FC<UserComponentProps> = (props: UserComponentProps) => {
   const classes = useStyles();
 
   const handleLogout = () => {

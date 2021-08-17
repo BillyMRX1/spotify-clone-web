@@ -25,9 +25,13 @@ const useStyles = makeStyles({
   }
 });
 
-const LoginPage = (props) => {
-  const classes = useStyles();
+interface LoginProps{
+  auth_link: string
+}
 
+const LoginPage: React.FC<LoginProps> = (props: LoginProps) => {
+  const classes = useStyles();
+  
   return (
     <Container className={classes.containerLogin} disableGutters>
       <Typography className={classes.text} variant="h1" color="primary">

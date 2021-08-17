@@ -1,6 +1,6 @@
 import PlaylistComponent from "../../components/landing/index";
 
-const PlaylistPage = () => {
+const PlaylistPage: React.FC = () => {
   return (
     <div>
       <PlaylistComponent />

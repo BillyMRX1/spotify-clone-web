@@ -7,18 +7,15 @@ import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
 const useStyles = makeStyles({
   textField: {
     backgroundColor: 'white',
-    marginLeft: 30,
     marginBottom: 10,
     width: 300,
     borderRadius: 4
   },
   textH6: {
-    marginTop: 10,
-    marginLeft: 30
+    marginTop: 10
   },
   btnSubmit: {
     display: 'flex',
-    marginLeft: 30,
     marginTop: 10,
     '&:hover': {
       backgroundColor: 'green'
@@ -26,12 +23,14 @@ const useStyles = makeStyles({
   }
 });
 
-interface FormPlaylistProps{
-  userId: string
-  data: string[]
+interface FormPlaylistProps {
+  userId: string;
+  data: string[];
 }
 
-const FormPlaylistComponent: React.FC<FormPlaylistProps> = (props: FormPlaylistProps) => {
+const FormPlaylistComponent: React.FC<FormPlaylistProps> = (
+  props: FormPlaylistProps
+) => {
   const { userId, data } = props;
   const token = `Bearer ${localStorage.getItem('token')}`;
   const [title, setTitle] = useState('');

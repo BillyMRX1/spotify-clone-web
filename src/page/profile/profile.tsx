@@ -38,7 +38,7 @@ const ProfilePage: React.FC = () => {
       } catch (error) {
         console.error(error);
       }
-    }
+    };
 
     getUserDetail();
   }, []);

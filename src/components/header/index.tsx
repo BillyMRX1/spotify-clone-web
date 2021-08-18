@@ -15,10 +15,16 @@ const useStyles = makeStyles({
 
 const HeaderComponent: React.FC = () => {
   const classes = useStyles();
-  const handlePlaylist = () => {
+  const handleCreatePlaylist = () => {
     localStorage.getItem('token') === ' '
       ? alert('Login First!')
       : (window.location.href = '/create-playlist');
+  };
+
+  const handleMyPlaylist = () => {
+    localStorage.getItem('token') === ' '
+      ? alert('Login First!')
+      : (window.location.href = '/my-playlist');
   };
 
   const handleProfile = () => {
@@ -40,7 +46,8 @@ const HeaderComponent: React.FC = () => {
           variant="contained"
           color="primary"
         >
-          <Button onClick={handlePlaylist}>Create Playlist</Button>
+          <Button onClick={handleCreatePlaylist}>Create Playlist</Button>
+          <Button onClick={handleMyPlaylist}>My Playlist</Button>
           <Button onClick={handleProfile}>Profile</Button>
         </ButtonGroup>
       </nav>

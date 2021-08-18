@@ -13,7 +13,7 @@ const FooterComponent: React.FC = () => {
     <div className="nav-container">
       <nav>
         <Typography className={classes.text} variant="h6" align="center">
-          Created By: BillyMRX
+          © BillyMRX
         </Typography>
       </nav>
     </div>

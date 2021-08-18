@@ -31,6 +31,6 @@ const App: React.FC = () => {
       </div>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

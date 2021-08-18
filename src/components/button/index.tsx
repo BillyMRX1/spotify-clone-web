@@ -4,11 +4,11 @@ import AddIcon from '@material-ui/icons/AddCircle';
 import RemoveIcon from '@material-ui/icons/RemoveCircle';
 
 const useStyles = makeStyles({
-  btnSelect: {},
+  btnSelect: {}
 });
 
-interface ButtonProps{
-  selected: boolean
+interface ButtonProps {
+  selected: boolean;
   onSelect: () => void;
   onDeselect: () => void;
 }

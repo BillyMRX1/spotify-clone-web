@@ -11,28 +11,30 @@ const tracks = {
       album: {
         images: [
           {
-            url: 'https://i.scdn.co/image/ab67616d0000b273e8b066f70c206551210d902b',
+            url: 'https://i.scdn.co/image/ab67616d0000b273e8b066f70c206551210d902b'
           },
           {
-            url: 'https://i.scdn.co/image/ab67616d0000b273e8b066f70c206551210d902b',
-          },
+            url: 'https://i.scdn.co/image/ab67616d0000b273e8b066f70c206551210d902b'
+          }
         ],
-        name: 'Bohemian Rhapsody (The Original Soundtrack)',
+        name: 'Bohemian Rhapsody (The Original Soundtrack)'
       },
       artists: [
         {
-          name: 'Queen',
-        },
+          name: 'Queen'
+        }
       ],
       id: '7xHATAMD7ezTZGYsNAMr5R',
       name: 'Bohemian Rhapsody - Live Aid',
-      uri: 'spotify:track:7xHATAMD7ezTZGYsNAMr5R',
-    },
-  ],
+      uri: 'spotify:track:7xHATAMD7ezTZGYsNAMr5R'
+    }
+  ]
 };
 
 const server = setupServer(
-  rest.get('https://api.spotify.com/v1/search', (req, res, ctx) => res(ctx.json({ tracks }))),
+  rest.get('https://api.spotify.com/v1/search', (req, res, ctx) =>
+    res(ctx.json({ tracks }))
+  )
 );
 
 beforeAll(() => server.listen());
@@ -43,9 +45,10 @@ it('Should render track list', async () => {
   render(
     <Provider store={store}>
       <LandingComponent />
-    </Provider>,
+    </Provider>
   );
   const btnSearch = screen.getByTestId('btn-search');
+  expect(btnSearch).toBeInTheDocument;
   fireEvent.click(btnSearch);
   expect(await screen.findAllByTestId('track-component')).toHaveLength(1);
 });

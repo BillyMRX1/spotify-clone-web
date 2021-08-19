@@ -14,7 +14,6 @@ const useStyles = makeStyles({
   playlistContainer: {
     display: 'flex',
     position: 'relative',
-    maxHeight: window.innerHeight,
     minHeight: '80vh',
     alignItems: 'center',
     flexDirection: 'column'

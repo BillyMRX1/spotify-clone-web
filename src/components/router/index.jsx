@@ -1,8 +1,8 @@
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
-  Redirect
+  Navigate
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PlaylistPage from '../../page/create_playlist/create_playlist';
@@ -49,36 +49,48 @@ const SpotifyRoute = () => {
 
   return (
     <Router>
-      <Switch>
-        <Route path="/create-playlist">
-          {localStorage.getItem('token') === ' ' ? (
-            <Redirect to="/" />
-          ) : (
-            <PlaylistPage />
-          )}
-        </Route>
-        <Route path="/profile">
-          {localStorage.getItem('token') === ' ' ? (
-            <Redirect to="/" />
-          ) : (
-            <ProfilePage />
-          )}
-        </Route>
-        <Route path="/my-playlist">
-          {localStorage.getItem('token') === ' ' ? (
-            <Redirect to="/" />
-          ) : (
-            <MyPlaylistPage />
-          )}
-        </Route>
-        <Route path="/">
-          {token === ' ' ? (
-            <LoginPage auth_link={auth_link} />
-          ) : (
-            <Redirect to="/create-playlist" />
-          )}
-        </Route>
-      </Switch>
+      <Routes>
+        <Route
+          path="/create-playlist"
+          element={
+            localStorage.getItem('token') === ' ' ? (
+              <Navigate to="/" />
+            ) : (
+              <PlaylistPage />
+            )
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            localStorage.getItem('token') === ' ' ? (
+              <Navigate to="/" />
+            ) : (
+              <ProfilePage />
+            )
+          }
+        />
+        <Route
+          path="/my-playlist"
+          element={
+            localStorage.getItem('token') === ' ' ? (
+              <Navigate to="/" />
+            ) : (
+              <MyPlaylistPage />
+            )
+          }
+        />
+        <Route
+          path="/"
+          element={
+            token === ' ' ? (
+              <LoginPage auth_link={auth_link} />
+            ) : (
+              <Navigate to="/create-playlist" />
+            )
+          }
+        />
+      </Routes>
     </Router>
   );
 };
